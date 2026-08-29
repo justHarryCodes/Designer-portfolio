@@ -1,0 +1,19 @@
+# Single-page app rewrite: send any request that isn't a real file/directory
+# (i.e. a client-side route like /branding) to index.html so React Router
+# can take over instead of Apache 404ing on refresh or direct navigation.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # If the request is for an actual file or directory, serve it as-is
+    # (images, videos, /assets/*.js, /assets/*.css, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Otherwise, hand it to the SPA
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# Fallback 404 for servers without mod_rewrite enabled
+ErrorDocument 404 /index.html
