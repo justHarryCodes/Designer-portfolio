@@ -1,0 +1,3921 @@
+/* --- Base & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505; /* Deep black background */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Added height to allow for scrolling to see the motion effect */
+            height: 200vh; 
+        }
+
+        /* --- Hero Container --- */
+        .hero-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* --- Top Spotlight Effect --- */
+        .spotlight {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- Massive Background Text --- */
+        .bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 28vw; /* Scales with screen width */
+            font-weight: 900;
+            line-height: 0.8;
+            color: #4a4a4a; /* The exact dark grey from your design */
+            z-index: 2;
+            letter-spacing: -5px;
+            width: 100%;
+            /* Motion effect transition */
+            will-change: transform;
+        }
+
+        /* --- Foreground Content (Your Photo & Bounding Box) --- */
+        .foreground-container {
+            position: relative;
+            z-index: 5;
+            width: 700px;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* The Bounding Box (Line at the back - made wider) */
+        .bounding-box {
+            position: absolute;
+            top: 10%;
+            left: -5%; /* Shifted left to stay centered with the new width */
+            width: 110%; /* Made significantly wider */
+            height: 70%;
+            border: 3px solid #ffffff; /* Slightly thicker line */
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* Bounding Box Anchor Points (The little yellow squares) */
+        .anchor {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ffcb05;
+            border: 1px solid #000;
+        }
+        .anchor.top-left { top: -4px; left: -4px; }
+        .anchor.top-right { top: -4px; right: -4px; }
+        .anchor.bottom-left { bottom: -4px; left: -4px; }
+        .anchor.bottom-right { bottom: -4px; right: -4px; }
+        .anchor.middle-left { top: 50%; left: -4px; transform: translateY(-50%); }
+        .anchor.middle-right { top: 50%; right: -4px; transform: translateY(-50%); }
+
+        /* Your Transparent Portrait Image (Adjusted width and top) */
+        .profile-img {
+            position: relative;
+            z-index: 6;
+            
+            /* --- YOUR NEW ADJUSTMENTS HERE --- */
+            width: 120%; 
+            top: 100px; 
+            max-width: none; /* Prevents the container from restricting the massive size */
+            /* --------------------------------- */
+            
+            height: auto;
+            object-fit: cover;
+            background-color: transparent; 
+        }
+
+        /* --- Yellow Accent Tags --- */
+        .tag {
+            position: absolute;
+            background-color: #ffcb05; /* Design yellow */
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            z-index: 7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Adjusted tags to fit the new massive image dimensions */
+        .tag.art-director {
+            top: 25%;
+            left: -15%;
+            transform: rotate(-5deg);
+        }
+
+        .tag.experience {
+            bottom: 25%;
+            right: -10%;
+            transform: rotate(5deg);
+        }
+
+        /* Simple CSS drawn arrows (can be replaced with PNGs later) */
+        .arrow-down {
+            width: 20px;
+            height: 20px;
+            border-left: 2px solid #ffcb05;
+            border-bottom: 2px solid #ffcb05;
+            position: absolute;
+        }
+        .art-director .arrow-down {
+            bottom: -30px;
+            left: 50%;
+            transform: rotate(-45deg);
+        }
+        .experience .arrow-down {
+            bottom: -30px;
+            left: 20%;
+            transform: rotate(45deg);
+        }
+
+        /* --- Bottom Footer Bar --- */
+        .bottom-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+        .bottom-bar .line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #4a4a4a;
+            margin: 0 20px;
+        }
+
+        /* --- PAGE 2 STYLES --- */
+        .about-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #4a4a4a;
+            margin-bottom: 40px;
+        }
+        .top-nav a {
+            color: #aaaaaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .top-nav a:hover { color: #ffffff; }
+        .nav-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #ffcb05;
+            border-radius: 50%;
+            margin-left: 5px;
+            transform: translateY(-2px);
+        }
+
+        /* 3-Column Layout */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 40px;
+            flex-grow: 1;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .accent-title {
+            color: #ffcb05;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Left Column - Timeline */
+        .timeline {
+            list-style: none;
+            border-left: 2px solid rgba(255,255,255,0.2);
+            padding-left: 20px;
+        }
+        .timeline li {
+            margin-bottom: 20px;
+            position: relative;
+            font-size: 0.85rem;
+        }
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 8px;
+            height: 8px;
+            background-color: #ffcb05;
+            border-radius: 50%;
+        }
+        .timeline li span { color: #aaaaaa; }
+
+        .bottom-creative { margin-top: 40px; position: relative; }
+        
+        .creative-huge { 
+            font-size: 3.5rem; 
+            font-weight: 900; /* Makes it very bold */
+            line-height: 1; 
+            color: #ffcb05; /* Pure white */
+            letter-spacing: 2px;
+        }
+        
+        .portfolio-small { 
+            font-size: 1.4rem; 
+            color: #ffffff; /* Pure white */
+            margin-left: 120px; 
+            font-weight: bold; 
+            margin-top: 15px;
+        }
+
+        /* Center Column - Typography & Image */
+        .center-col {
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .jerry-small { font-size: 2rem; color: #666; letter-spacing: 8px; font-weight: 300; }
+        .awaghor-huge { font-size: 5.5rem; color: #4a4a4a; font-weight: 900; line-height: 0.8; margin-bottom: 10px; }
+        .art-director-label { align-self: flex-end; color: #aaaaaa; font-size: 1.2rem; margin-right: 20px; }
+        
+        .profile-img-2 {
+            width: 100%;
+            max-width: none;
+            margin-top: -50px; /* Pulls image up over the text slightly */
+            z-index: 5;
+        }
+
+        /* Right Column - Skills & DNA */
+        .skills-list {
+            list-style: none;
+            color: #dddddd;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        /* The distinct Text Box container */
+        .dna-card {
+            background-color: #0a0a0a; /* Dark distinct background */
+            border: 1px solid #333333; /* Visible border to create the box */
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px; /* Space between the skills list and this box */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Subtle shadow for depth */
+        }
+
+        /* The uniquely styled text inside the box */
+        
+        .dna-card .accent-title {
+            color: #ffcb05; /* The yellow title */
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Tells the column to stretch from top to bottom */
+        }
+
+        .dna-stats {
+            color: #ffffff; /* Crisp, bold white for the numbers */
+            font-size: 1.4rem;
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .dna-text {
+            color: #aaaaaa; /* Soft grey for the paragraph */
+            font-size: 0.85rem;
+            line-height: 1.9;
+            text-align: left;
+        }
+
+        /* --- PAGE 3 STYLES --- */
+        .page-3-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+        }
+
+        .page-3-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 50/50 split */
+            gap: 60px;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        /* Left Column Styles */
+        .p3-left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .about-text {
+            color: #dddddd;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            text-align: justify;
+        }
+
+        .logos-img {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        /* Right Column Styles */
+        .p3-right-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .p3-image-wrapper {
+            position: relative;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Specific Bounding Box for Page 3 */
+        .p3-bounding-box {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            border: 2px solid #ffffff;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .p3-box-arrow {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+        }
+
+        .p3-profile-img {
+            position: relative;
+            z-index: 5;
+            width: 110%; /* Adjust this to change your picture size */
+            margin-top: -30px; /* Adjust this to move your picture up or down */
+            height: auto;
+        }
+
+        /* Softwares Section */
+        .softwares-section {
+            position: absolute;
+            top: 1%;
+            right: -10%; /* Pushes the text outside the bounding box */
+            z-index: 6;
+            text-align: center;
+        }
+
+        .softwares-title {
+            color: #ffcb05;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .softwares-list {
+            list-style: none;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .software-arrow {
+            margin-top: 10px;
+            margin-left: -20px;
+        }
+        /* --- PAGE 4 STYLES --- */
+        .page-4-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 5%;
+            /* Subtle dot pattern background to match your design */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+
+        .toc-title-wrapper {
+            position: relative;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 0;
+            margin-bottom: 80px;
+        }
+
+        .p4-bounding-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ffffff;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* Center anchors for the bounding box */
+        .anchor.top-center { top: -4px; left: 50%; transform: translateX(-50%); }
+        .anchor.bottom-center { bottom: -4px; left: 50%; transform: translateX(-50%); }
+
+        .p4-box-arrow {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+        }
+
+        .toc-huge-title {
+            font-size: 6vw; /* Scales perfectly with screen size */
+            color: #4a4a4a; /* Exact dark grey */
+            font-weight: 900;
+            letter-spacing: 3px;
+            z-index: 5;
+        }
+
+        /* Grid for the 6 items */
+        .toc-items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns across */
+            gap: 60px 40px; /* Space between rows and columns */
+            width: 80%;
+            margin-bottom: 100px;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .toc-number {
+            font-size: 6rem;
+            color: #ffffff;
+            font-weight: 900;
+            line-height: 0.8;
+            z-index: 2;
+            position: relative;
+            /* Subtle drop shadow so the white pops over the yellow */
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .toc-label {
+            background-color: #ffcb05; /* Brand yellow */
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px 25px 10px 45px;
+            border-radius: 30px;
+            margin-left: -35px; /* Pulls the yellow pill UNDER the number */
+            z-index: 1;
+            /* Drop shadow for the 3D effect shown in the image */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+            white-space: nowrap;
+        }
+        .page-4-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 5%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size: 40px 40px;
+            
+            /* THIS LINE FIXES IT: Stops the light from bleeding up into Page 3 */
+            overflow: hidden; 
+        }
+        /* --- PAGE 5 STYLES --- */
+        .page-5-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            /* Keeps the dot pattern from Page 4 */
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size: 40px 40px;
+            overflow: hidden;
+        }
+
+        .page-5-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Pushes it up slightly to balance visually with the nav and footer */
+            margin-top: -50px; 
+        }
+
+        .branding-title-wrapper {
+            position: relative;
+            /* This padding controls how big the white box is around the text */
+            padding: 80px 120px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .p5-bounding-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ffffff;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .p5-box-arrow {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+        }
+
+        .branding-huge-title {
+            font-size: 8vw; /* Keeps the text massive and scales on smaller screens */
+            color: #555555; /* The dark grey from your design */
+            font-weight: 900;
+            letter-spacing: 5px;
+            z-index: 5;
+            margin: 0;
+        }
+
+        /* --- PAGE 6 STYLES --- */
+        .page-6-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-6-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px; /* Space for the footer */
+        }
+
+        .p6-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Typography */
+        .orange-heading {
+            color: #F8B33A; /* Design's Heritage Orange */
+            font-size: 1.1rem;
+            margin-bottom: -10px; /* Pulls text closer to heading */
+            font-weight: bold;
+        }
+
+         .p6-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            
+            /* THIS FORCES IT TO ALIGN LEFT */
+            text-align: left; 
+        }       
+        .p6-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+      .p6-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            
+            /* THIS ENSURES THE LIST ALIGNS LEFT */
+            text-align: left; 
+        }
+
+        /* Left Column Additions */
+        .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+        }
+
+        .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Center Column Additions */
+        .mockup-img {
+            width: 100%;
+            border-radius: 15px; /* Matches your rounded edges */
+            margin: 10px 0;
+        }
+
+      .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            
+            /* THIS FORCES THE SHAPES TO STRETCH TO THE END OF THE COLUMN */
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .white-row {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .orange-row {
+            background-color: #F8B33A;
+            color: #ffffff;
+        }
+
+        .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .color-codes {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .code-line {
+            display: flex;
+            justify-content: space-between;
+            
+            /* INCREASED WIDTH to spread the Hex/CMYK text out nicely */
+            width: 160px; 
+            margin-bottom: 2px;
+        }
+        
+        .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* Right Column Additions */
+        .right-col {
+            display: flex;
+            align-items: stretch; /* Stretches the image container */
+        }
+        
+        .guy-shirt-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fills the column nicely */
+        }
+        .page-6-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; 
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px; 
+            
+            /* ADD THIS LINE to push the entire grid down */
+            margin-top: 50px; 
+        }
+        .p6-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            
+            /* 1. INCREASE THIS NUMBER for more space between lines (e.g., 2.2, 2.5) */
+            line-height: 3.0; 
+            
+            /* 2. ADD THIS to create space below the paragraph */
+            margin-bottom: 15px; 
+            
+            text-align: justify;
+        }
+        /* --- PAGE 7 STYLES --- */
+        .page-7-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-7-container {
+            display: flex;
+            flex-direction: column;
+            gap: 50px; /* Space between the top and bottom rows */
+            flex-grow: 1;
+            margin-bottom: 60px; /* Leaves room for the footer */
+            margin-top: 20px;
+        }
+
+        /* Top Row Layout */
+        .p7-top-row {
+            display: flex;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .p7-col {
+            flex: 1; /* Ensures both left and right columns are perfectly equal */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* The Orange Vertical Separator */
+        .p7-vertical-divider {
+            width: 5px;
+            background-color: #F8B33A; /* Heritage Orange */
+            border-radius: 5px;
+            margin-top: 40px; /* Pushes the line down slightly to align nicely with the images */
+            margin-bottom: 10px;
+        }
+
+        /* Section Headers and White Lines */
+        .p7-section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .p7-section-header .orange-heading {
+            margin-bottom: 0; /* Overrides previous heading margins */
+            white-space: nowrap; /* Keeps the text on one single line */
+            font-size: 0.95rem; /* Slightly smaller for an elegant look */
+        }
+
+        .header-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #ffffff; /* The thin white line from your design */
+        }
+
+        /* Image Styling */
+        .p7-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /* Adds a very subtle rounding to the image edges */
+        }
+
+        .p7-img-full {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* --- PAGE 8 STYLES (NEXBIZ MARKETING) --- */
+        .page-8-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-8-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+        }
+
+        .p8-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Typography --- */
+        .p8-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+        
+        .p8-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .p8-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        /* Isolated heading color just for this page's exact hex code */
+        .nexbiz-heading {
+            color: #E8833A; 
+            font-size: 1.1rem;
+            margin-bottom: -10px; 
+            font-weight: bold;
+        }
+
+        /* --- Left Column Elements --- */
+        .page-8-section .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .page-8-section .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .page-8-section .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-8-section .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Center Column Elements --- */
+        .page-8-section .mockup-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .page-8-section .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .page-8-section .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        /* Exact colors extracted from the design */
+        .nexbiz-blue-row {
+            background-color: #174a98;
+            color: #ffffff;
+        }
+
+        .nexbiz-orange-row {
+            background-color: #E8833A;
+            color: #ffffff;
+        }
+
+        .page-8-section .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .page-8-section .code-line {
+            display: flex;
+            justify-content: space-between;
+            width: 120px; 
+            margin-bottom: 2px;
+        }
+        
+        .page-8-section .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* --- Right Column Elements --- */
+        .page-8-section .right-col {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .page-8-section .front-desk-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        /* --- PAGE 9 STYLES --- */
+        .page-9-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-9-container {
+            display: flex;
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+            align-items: stretch; /* Ensures columns fill the vertical space */
+        }
+
+        .p9-col {
+            flex: 1; /* Makes both columns take up equal space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* If your left image is significantly wider than your right image, 
+           you can change the flex property below to give it more room */
+        .page-9-section .left-col {
+            flex: 1.5; /* Gives the left mockups slightly more horizontal room */
+        }
+        
+        .page-9-section .right-col {
+            flex: 1; 
+        }
+
+        .p9-img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px; /* Adds a nice smooth curve to match your other pages */
+            object-fit: contain;
+        }
+        /* --- PAGE 10 STYLES (APPLIED DEVELOPMENT) --- */
+        .page-10-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-10-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+        }
+
+        .p10-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Typography --- */
+        .p10-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+        
+        .p10-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .p10-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        /* Exact Construction Red (#FF0000) for this page's headings */
+        .applied-heading {
+            color: #FF0000; 
+            font-size: 1.1rem;
+            margin-bottom: -10px; 
+            font-weight: bold;
+        }
+
+        /* --- Left Column Elements --- */
+        .page-10-section .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .page-10-section .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .page-10-section .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-10-section .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Center Column Elements --- */
+        .page-10-section .mockup-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .page-10-section .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .page-10-section .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .page-10-section .white-row {
+            background-color: #ffffff;
+        }
+
+        /* Exact Construction Red (#FF0000) row */
+        .applied-red-row {
+            background-color: #FF0000;
+            color: #ffffff;
+        }
+
+        .page-10-section .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .page-10-section .code-line {
+            display: flex;
+            justify-content: space-between;
+            width: 120px; 
+            margin-bottom: 2px;
+        }
+        
+        .page-10-section .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* --- Right Column Elements --- */
+        .page-10-section .right-col {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .page-10-section .skyscraper-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        /* --- PAGE 11 STYLES --- */
+        .page-11-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-11-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 20px; /* Space between columns */
+            flex-grow: 1;
+            margin-bottom: 80px; /* Leaves space for the footer */
+            margin-top: 40px; 
+        }
+
+        .p11-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between top and bottom images */
+        }
+
+        /* The tiny header text above the images */
+        .p11-label {
+            display: flex;
+            justify-content: space-between;
+            color: #ffffff;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: -5px; /* Pulls the image closer to the text */
+            opacity: 0.9;
+        }
+
+        .p11-img {
+            width: 100%;
+            height: auto; 
+            border-radius: 12px; /* Smooth rounded corners matching your design */
+            object-fit: cover;
+        }
+        /* --- PAGE 12 STYLES (RICHIE EDIBLES) --- */
+        .page-12-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-12-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+        }
+
+        .p12-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Typography --- */
+        .p12-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+        
+        .p12-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .p12-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        /* Exact Richie Yellow (#FCBD00) for headings */
+        .richie-heading {
+            color: #FCBD00; 
+            font-size: 1.1rem;
+            margin-bottom: -10px; 
+            font-weight: bold;
+        }
+
+        /* --- Left Column Elements --- */
+        .page-12-section .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .page-12-section .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .page-12-section .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-12-section .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Center Column Elements --- */
+        .page-12-section .mockup-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .page-12-section .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .page-12-section .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .page-12-section .white-row {
+            background-color: #ffffff;
+        }
+
+        /* Exact Richie Yellow (#FCBD00) row */
+        .richie-yellow-row {
+            background-color: #FCBD00;
+            color: #ffffff; /* Contrast text */
+        }
+
+        /* Exact Richie Brown (#4A1702) row */
+        .richie-brown-row {
+            background-color: #4A1702;
+            color: #ffffff;
+        }
+
+        .page-12-section .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .page-12-section .code-line {
+            display: flex;
+            justify-content: space-between;
+            width: 120px; 
+            margin-bottom: 2px;
+        }
+        
+        .page-12-section .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* --- Right Column Elements --- */
+        .page-12-section .right-col {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .page-12-section .bakery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        /* --- PAGE 13 STYLES --- */
+        .page-13-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-13-container {
+            display: flex;
+            gap: 20px;
+            flex-grow: 1;
+            margin-bottom: 80px; 
+            margin-top: 40px; 
+            align-items: stretch; /* Ensures all columns stretch to the same height */
+        }
+
+        .p13-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Controlling the column widths perfectly */
+        .page-13-section .left-col {
+            flex: 1; /* Standard width */
+        }
+
+        .page-13-section .center-col {
+            flex: 1.8; /* Makes the center box wider than the sides */
+        }
+
+        .page-13-section .right-col {
+            flex: 1; /* Standard width */
+        }
+
+        /* Image Styling */
+        .p13-img {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; /* Ensures images fill their blocks without stretching weirdly */
+            border-radius: 12px;
+        }
+
+        .p13-img-large {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        /* --- PAGE 14 STYLES (AGORA MEDICAL) --- */
+        .page-14-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-14-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+        }
+
+        .p14-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Typography --- */
+        .p14-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+        
+        .p14-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .p14-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        /* Cyan Heading Color */
+        .agora-heading {
+            color: #35C0ED; 
+            font-size: 1.1rem;
+            margin-bottom: -10px; 
+            font-weight: bold;
+        }
+
+        /* --- Left Column Elements --- */
+        .page-14-section .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .page-14-section .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .page-14-section .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-14-section .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Center Column Elements --- */
+        .page-14-section .mockup-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .page-14-section .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .page-14-section .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .page-14-section .white-row {
+            background-color: #ffffff;
+        }
+
+        /* Cyan Background Row */
+        .agora-cyan-row {
+            background-color: #35C0ED;
+            color: #ffffff; 
+        }
+
+        /* Darker Blue Background Row */
+        .agora-blue-row {
+            background-color: #2175D9;
+            color: #ffffff;
+        }
+
+        .page-14-section .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .page-14-section .code-line {
+            display: flex;
+            justify-content: space-between;
+            width: 120px; 
+            margin-bottom: 2px;
+        }
+        
+        .page-14-section .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* --- Right Column Elements --- */
+        .page-14-section .right-col {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .page-14-section .hospital-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        /* --- PAGE 14 STYLES (AGORA MEDICAL) --- */
+        .page-14-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505;
+        }
+
+        .page-14-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Equal Columns */
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 50px; 
+        }
+
+        .p14-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* --- Typography --- */
+        .p14-text {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.4; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+        
+        .p14-bold {
+            font-weight: bold;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .p14-list {
+            color: #dddddd;
+            font-size: 0.85rem;
+            line-height: 2.2; 
+            padding-left: 20px;
+            margin-top: -10px;
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        /* Cyan Heading Color */
+        .agora-heading {
+            color: #35C0ED; 
+            font-size: 1.1rem;
+            margin-bottom: -10px; 
+            font-weight: bold;
+        }
+
+        /* --- Left Column Elements --- */
+        .page-14-section .logo-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .page-14-section .logo-card img {
+            max-width: 180px; 
+            height: auto;
+        }
+
+        .page-14-section .software-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-14-section .icon-box {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Center Column Elements --- */
+        .page-14-section .mockup-img {
+            width: 100%;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .page-14-section .color-palette {
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden; 
+            font-size: 0.75rem;
+            width: 100%; 
+            margin-top: 10px;
+        }
+
+        .page-14-section .color-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+        }
+
+        .page-14-section .white-row {
+            background-color: #ffffff;
+        }
+
+        /* Cyan Background Row */
+        .agora-cyan-row {
+            background-color: #35C0ED;
+            color: #ffffff; 
+        }
+
+        /* Darker Blue Background Row */
+        .agora-blue-row {
+            background-color: #2175D9;
+            color: #ffffff;
+        }
+
+        .page-14-section .color-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .page-14-section .code-line {
+            display: flex;
+            justify-content: space-between;
+            width: 120px; 
+            margin-bottom: 2px;
+        }
+        
+        .page-14-section .code-line span {
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        /* --- Right Column Elements --- */
+        .page-14-section .right-col {
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .page-14-section .hospital-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; 
+        }
+        /* --- PAGE 15 STYLES (SOCIAL MEDIA) --- */
+        .page-15-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            /* Faint dotted background pattern mirroring your design */
+            background-color: #050505;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+
+        .page-15-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            margin-bottom: 60px; /* Space for footer */
+        }
+
+        /* The Main White Bounding Box */
+        .p15-bounding-box {
+            position: relative;
+            border: 2px solid #ffffff;
+            padding: 80px 100px;
+        }
+
+        /* The Huge Muted Grey Text */
+        .social-huge-title {
+            font-size: 6.5rem;
+            font-weight: 900;
+            color: #666666; /* Muted grey to match the design */
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        /* The Yellow Anchor Squares */
+        .p15-anchor {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #FFC107; /* The exact bright yellow from your mockup */
+        }
+
+        /* Positioning each anchor perfectly on the border */
+        .p15-tl { top: -7px; left: -7px; }
+        .p15-tc { top: -7px; left: 50%; transform: translateX(-50%); }
+        .p15-tr { top: -7px; right: -7px; }
+        .p15-bl { bottom: -7px; left: -7px; }
+        .p15-bc { bottom: -7px; left: 50%; transform: translateX(-50%); }
+        .p15-br { bottom: -7px; right: -7px; }
+
+        /* The Yellow Cursor Positioning */
+        .p15-cursor {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            bottom: -45px;
+            right: -35px;
+            transform: rotate(-10deg); /* Slight natural tilt */
+        }
+        /* --- PAGE 16 STYLES (DINAMICO SOCIAL MEDIA) --- */
+        .page-16-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #EFEFEF; /* Clean light grey background */
+            overflow: hidden;
+        }
+
+        /* Override global nav and footer colors for this light page */
+        .page-16-section .top-nav a { color: #000000; }
+        .page-16-section .bottom-bar span { color: #000000; }
+        .page-16-section .bottom-bar .line { background-color: #000000; }
+
+        .page-16-container {
+            display: grid;
+            /* Left column gets slightly more space for the text */
+            grid-template-columns: 1.2fr 1fr 1fr; 
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 20px; 
+        }
+
+        .p16-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Typography --- */
+        .dinamico-logo {
+            max-width: 220px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .dinamico-huge-title {
+            color: #10408F; /* Exact Dinamico Blue */
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 15px 0 25px 0;
+            text-align: left;
+        }
+
+        .dinamico-heading {
+            color: #10408F; 
+            font-size: 1.1rem;
+            margin-bottom: 10px; 
+            font-weight: bold;
+        }
+
+        .p16-text {
+            color: #000000; /* Black text for readability on light bg */
+            font-size: 0.85rem;
+            line-height: 2.0; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+
+        /* Software Icons dark override */
+        .p16-icons .icon-box {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* --- Middle Column: Flyer Stack --- */
+        .flyer-stack {
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .dinamico-flyer-1 {
+            width: 95%;
+            height: auto;
+            transform: rotate(10deg); /* Angles the top flyer */
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
+        }
+
+        .dinamico-flyer-2 {
+            width: 95%;
+            height: auto;
+            transform: rotate(10deg); /* Angles the bottom flyer */
+            margin-top: -60px; /* Pulls the second flyer up to overlap */
+            z-index: 1;
+            position: relative;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        }
+
+        /* --- Right Column: Phone Mockup --- */
+        .page-16-section .right-col {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dinamico-phone {
+            width: 90%;
+            height: auto;
+            transform: rotate(8deg); /* Angles the phone slightly */
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
+        }
+        /* --- PAGE 16 STYLES (DINAMICO SOCIAL MEDIA) --- */
+        .page-16-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #EFEFEF; 
+            
+            /* ADDED: Subtle Background Texture (Dot Grid) */
+            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            
+            overflow: hidden;
+        }
+        /* The New Blue Square Box */
+        .dinamico-logo-box {
+            background-color: #10408F; /* Exact Dinamico Blue */
+            padding: 25px 35px; /* Adjust these numbers to make the square wider or taller */
+            border-radius: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .dinamico-logo {
+            max-width: 160px; /* Slightly smaller so it fits perfectly inside the padding */
+            height: auto;
+        }
+        /* --- PAGE 17 STYLES (DINAMICO GRID) --- */
+        .page-17-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505; /* Returns to the dark background */
+        }
+
+        /* Forces nav and footer text back to white for this dark section */
+        .page-17-section .top-nav a { color: #ffffff; }
+        .page-17-section .bottom-bar span { color: #ffffff; }
+        .page-17-section .bottom-bar .line { background-color: #ffffff; }
+
+        .page-17-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Creates 4 perfectly equal columns */
+            gap: 20px; /* Spacing between the flyers */
+            flex-grow: 1;
+            margin-bottom: 80px; 
+            margin-top: 40px; 
+            align-content: center; /* Centers the grid vertically */
+        }
+
+        .p17-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            /* Corners are left sharp to match the exact look of your design */
+        }
+        /* --- PAGE 18 STYLES (TERCESCROW SOCIAL MEDIA) --- */
+        .page-18-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #EFEFEF; /* Clean light grey background */
+            /* Subtle Background Texture (Dot Grid) */
+            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            overflow: hidden;
+        }
+
+        /* Override global nav and footer colors for this light page */
+        .page-18-section .top-nav a { color: #000000; }
+        .page-18-section .bottom-bar span { color: #000000; }
+        .page-18-section .bottom-bar .line { background-color: #000000; }
+
+        .page-18-container {
+            display: grid;
+            /* Left column gets slightly more space for the text */
+            grid-template-columns: 1.2fr 1fr 1fr; 
+            gap: 40px;
+            flex-grow: 1;
+            margin-bottom: 60px;
+            margin-top: 20px; 
+        }
+
+        .p18-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Typography & Logo --- */
+        .tercescrow-logo-box {
+            background-color: #ffffff; /* White card for the logo */
+            padding: 20px 30px; 
+            border-radius: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Soft drop shadow */
+        }
+
+        .tercescrow-logo {
+            max-width: 160px; 
+            height: auto;
+        }
+
+        .tercescrow-huge-title {
+            color: #1E8765; /* Exact Tercescrow Green */
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 15px 0 25px 0;
+            text-align: left;
+        }
+
+        .tercescrow-heading {
+            color: #1E8765; 
+            font-size: 1.1rem;
+            margin-bottom: 10px; 
+            font-weight: bold;
+        }
+
+        .p18-text {
+            color: #000000; /* Black text for readability on light bg */
+            font-size: 0.85rem;
+            line-height: 2.0; 
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+
+        /* Software Icons dark override */
+        .p18-icons .icon-box {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* --- Middle Column: Flyer Stack --- */
+        .page-18-section .flyer-stack {
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .tercescrow-flyer-1 {
+            width: 95%;
+            height: auto;
+            transform: rotate(10deg); /* Angles the top flyer */
+            z-index: 2;
+            position: relative;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
+        }
+
+        .tercescrow-flyer-2 {
+            width: 95%;
+            height: auto;
+            transform: rotate(10deg); /* Angles the bottom flyer */
+            margin-top: -60px; /* Pulls the second flyer up to overlap */
+            z-index: 1;
+            position: relative;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+        }
+
+        /* --- Right Column: Phone Mockup --- */
+        .page-18-section .right-col {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tercescrow-phone {
+            width: 90%;
+            height: auto;
+            transform: rotate(8deg); /* Angles the phone slightly */
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
+        }
+        /* --- PAGE 19 STYLES (TERCESCROW GRID) --- */
+        .page-19-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #EFEFEF; /* Matches the light background of Page 18 */
+        }
+
+        /* Forces nav and footer text to black for this light section */
+        .page-19-section .top-nav a { color: #000000; }
+        .page-19-section .bottom-bar span { color: #000000; }
+        .page-19-section .bottom-bar .line { background-color: #000000; }
+
+        .page-19-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Creates 4 perfectly equal columns */
+            gap: 20px; /* Spacing between the flyers */
+            flex-grow: 1;
+            margin-bottom: 80px; 
+            margin-top: 40px; 
+            align-content: center; /* Centers the grid vertically */
+        }
+
+        .p19-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            /* Corners are left sharp to match the exact look of your design */
+        }
+        /* --- PAGE 20 STYLES (OTHER SOCIAL MEDIA) --- */
+        .page-20-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #EFEFEF; /* Clean light grey to match the theme */
+            /* Subtle dotted background pattern */
+            background-image: radial-gradient(rgba(0, 0, 0, 0.05) 2px, transparent 2px);
+            background-size: 35px 35px;
+            overflow: hidden;
+        }
+
+        /* Override global nav and footer colors to black for this light page */
+        .page-20-section .top-nav a { color: #000000; }
+        .page-20-section .bottom-bar span { color: #000000; }
+        .page-20-section .bottom-bar .line { background-color: #000000; }
+
+        .page-20-container {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+            margin-top: 40px; 
+        }
+
+        /* --- Top Left Elements --- */
+        .p20-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .p20-main-title {
+            color: #000000;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* --- Bottom Left Elements --- */
+        .p20-softwares {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            text-align: left;
+        }
+
+        .p20-software-heading {
+            color: #000000;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Software Icons dark override */
+        .p20-icons .icon-box {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* --- Center Bounding Box Elements --- */
+        .p20-bounding-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .p20-bounding-box {
+            position: relative;
+            border: 2px solid #000000;
+            padding: 70px 90px;
+            text-align: center;
+        }
+
+        .other-social-title {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #000000;
+            margin: 0;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        /* The Black Anchor Squares */
+        .p20-anchor {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #000000; 
+        }
+
+        /* Positioning each anchor perfectly on the border */
+        .p20-tl { top: -7px; left: -7px; }
+        .p20-tc { top: -7px; left: 50%; transform: translateX(-50%); }
+        .p20-tr { top: -7px; right: -7px; }
+        .p20-bl { bottom: -7px; left: -7px; }
+        .p20-bc { bottom: -7px; left: 50%; transform: translateX(-50%); }
+        .p20-br { bottom: -7px; right: -7px; }
+
+        /* The Black Cursor Positioning */
+        .p20-cursor {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            bottom: -45px;
+            right: -35px;
+            transform: rotate(-10deg); 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); /* Soft shadow to lift it off the page */
+        }
+        /* --- PAGE 21 STYLES (FULL PAGE COLLAGE) --- */
+        .page-21-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505; /* Keeps the dark gallery theme */
+        }
+
+        /* Forces nav and footer text back to pure white */
+        .page-21-section .top-nav a { color: #ffffff; }
+        .page-21-section .bottom-bar span { color: #ffffff; }
+        .page-21-section .bottom-bar .line { background-color: #ffffff; }
+
+        .page-21-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            margin-bottom: 80px; 
+            margin-top: 40px; 
+            width: 100%;
+        }
+
+        .caps-full-img {
+            width: 100%;
+            height: auto; /* Scales proportionally so nothing gets cut off */
+            max-height: 80vh; /* Keeps it contained cleanly between the nav and footer */
+            object-fit: cover;
+            border-radius: 12px; /* A slight curve to match your previous portfolio images */
+        }
+        /* --- PAGE 22 STYLES (FULL PAGE COLLAGE) --- */
+        .page-22-section {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 5%;
+            background-color: #050505; /* Keeps the dark gallery theme consistent */
+        }
+
+        /* Forces nav and footer text back to pure white */
+        .page-22-section .top-nav a { color: #ffffff; }
+        .page-22-section .bottom-bar span { color: #ffffff; }
+        .page-22-section .bottom-bar .line { background-color: #ffffff; }
+
+        .page-22-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            margin-bottom: 80px; 
+            margin-top: 40px; 
+            width: 100%;
+        }
+
+        .p22-full-img {
+            width: 100%;
+            height: auto; 
+            max-height: 80vh; /* Keeps it perfectly framed between the menu and footer */
+            object-fit: cover;
+            border-radius: 12px; /* Smooth corners matching your portfolio aesthetic */
+        }
+/* =========================================
+   PRINTING SECTION HEADER
+   ========================================= */
+
+#page-printing-header {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #070707; /* Dark background */
+    /* CSS generated staggered dot pattern to match the image */
+    background-image: 
+        radial-gradient(#1a1a1a 2px, transparent 2px),
+        radial-gradient(#1a1a1a 2px, transparent 2px);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.print-center-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- The White Transform Box --- */
+.print-bounding-box {
+    position: relative;
+    border: 3px solid #FFFFFF;
+    width: 60vw;
+    max-width: 750px;
+    height: 35vh;
+    max-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+/* --- Yellow Anchor Nodes --- */
+.print-node {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #FFC800;
+}
+
+.print-node.top-left { top: -8.5px; left: -8.5px; }
+.print-node.top-center { top: -8.5px; left: 50%; transform: translateX(-50%); }
+.print-node.top-right { top: -8.5px; right: -8.5px; }
+.print-node.bottom-left { bottom: -8.5px; left: -8.5px; }
+.print-node.bottom-center { bottom: -8.5px; left: 50%; transform: translateX(-50%); }
+.print-node.bottom-right { bottom: -8.5px; right: -8.5px; }
+
+/* --- Center Text Styling --- */
+.print-text {
+    color: #777777; /* Medium-dark gray */
+    font-size: clamp(3rem, 6vw, 6rem); /* Scales fluidly with screen size */
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.1;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 3px;
+}
+
+/* --- Yellow SVG Cursor Pointer --- */
+.print-cursor {
+    position: absolute;
+    bottom: -45px;
+    right: -25px;
+    width: 45px;
+    height: 45px;
+    transform: rotate(-10deg);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* --- Header Overlay Styling --- */
+#page-printing-header .portfolio-header {
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-printing-header .portfolio-header .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin-right: 30px;
+}
+
+#page-printing-header .portfolio-header .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-printing-header .portfolio-header .header-nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-printing-header .portfolio-header .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-printing-header .portfolio-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-printing-header .portfolio-footer .footer-name, 
+#page-printing-header .portfolio-footer .footer-year {
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-printing-header .portfolio-footer .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin: 0 20px;
+}
+
+/* --- Responsive Layout Breakpoints --- */
+@media (max-width: 900px) {
+    .print-bounding-box {
+        width: 85vw;
+        height: 25vh;
+    }
+    
+    #page-printing-header .portfolio-header .header-nav {
+        display: none;
+    }
+    
+    #page-printing-header .portfolio-header .header-line {
+        margin-right: 20px;
+    }
+}
+
+/* =========================================
+   PAGE 21: CHIDEL PACKAGING DESIGN (COMPLETE)
+   ========================================= */
+
+/* --- Main Container & Background --- */
+#page-21-design {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 100px 5% 80px 5%; /* Accommodates header and footer */
+    box-sizing: border-box;
+    
+    background-image: url('/Page 22 background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* --- Split Column Grid Layout --- */
+.p21-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    z-index: 10;
+}
+
+/* --- Left Column Elements --- */
+.p21-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.p21-logo {
+    width: 180px;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.p21-title {
+    color: #8C2C20;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.p21-description {
+    color: #000000;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.p21-subtitle {
+    color: #8C2C20;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 10px 0 0 0;
+}
+
+.p21-software-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.p21-badge {
+    background-color: #5A3D31;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.p21-mockup-left {
+    width: 100%;
+    max-width: 380px;
+    margin-top: 15px;
+    object-fit: contain;
+}
+
+/* --- Right Column Elements --- */
+.p21-right-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p21-mockup-right {
+    width: 100%;
+    max-width: 650px;
+    object-fit: contain;
+    filter: drop-shadow(5px 15px 25px rgba(0, 0, 0, 0.15));
+}
+
+/* --- Top Header Styling --- */
+.portfolio-header-light {
+    position: absolute;
+    top: 40px; 
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+.portfolio-header-light .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin-right: 30px;
+}
+
+.portfolio-header-light .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+.portfolio-header-light .header-nav a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.portfolio-header-light .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Bottom Footer Styling --- */
+.portfolio-footer-light {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+.portfolio-footer-light .footer-name, 
+.portfolio-footer-light .footer-year {
+    color: #333333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.portfolio-footer-light .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin: 0 20px;
+}
+
+/* --- Mobile Responsive Breakpoints --- */
+@media (max-width: 900px) {
+    .p21-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+    
+    .p21-left-column {
+        align-items: center;
+    }
+    
+    .p21-description {
+        text-align: left;
+    }
+    
+    .p21-logo {
+        margin-bottom: 20px;
+    }
+    
+    .portfolio-header-light .header-nav {
+        display: none; 
+    }
+    
+    .portfolio-header-light .header-line {
+        margin-right: 20px;
+    }
+}
+
+/* =========================================
+   PAGE 22: CHIDEL FULL MOCKUP (100% VIEWPORT FILL)
+   ========================================= */
+
+#page-22-full {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p22-full-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 1;
+}
+
+/* --- Header Overlay Styling --- */
+#page-22-full .portfolio-header-light {
+    position: absolute;
+    top: 40px; 
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-22-full .portfolio-header-light .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin-right: 30px;
+}
+
+#page-22-full .portfolio-header-light .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-22-full .portfolio-header-light .header-nav a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-22-full .portfolio-header-light .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-22-full .portfolio-footer-light {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-22-full .portfolio-footer-light .footer-name, 
+#page-22-full .portfolio-footer-light .footer-year {
+    color: #333333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-22-full .portfolio-footer-light .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin: 0 20px;
+}
+
+/* --- Mobile Responsive Breakpoints --- */
+@media (max-width: 900px) {
+    #page-22-full .portfolio-header-light .header-nav {
+        display: none; 
+    }
+    #page-22-full .portfolio-header-light .header-line {
+        margin-right: 20px;
+    }
+}
+
+
+/* =========================================
+   PAGE 23: CHIDEL BRAND GALLERY
+   ========================================= */
+
+#page-23-gallery {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #000000;
+    padding: 90px 5% 70px 5%;
+    box-sizing: border-box;
+}
+
+.p23-content-wrapper {
+    display: grid;
+    grid-template-columns: 42% 54%;
+    gap: 4%;
+    max-width: 1400px;
+    width: 100%;
+    align-items: center;
+    z-index: 10;
+}
+
+/* --- Left Side Grid Layout --- */
+.p23-left-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.p23-image-frame {
+    background-color: #FFFFFF; /* White shape framing behind each image */
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    aspect-ratio: 4 / 3;
+}
+
+.p23-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.logo-frame {
+    padding: 15px; /* Tailored spacing for the logo asset */
+}
+
+/* --- Right Side Food Image --- */
+.p23-right-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.p23-main-food-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Header Overlay Styling --- */
+#page-23-gallery .portfolio-header {
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-23-gallery .portfolio-header .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin-right: 30px;
+}
+
+#page-23-gallery .portfolio-header .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-23-gallery .portfolio-header .header-nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-23-gallery .portfolio-header .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-23-gallery .portfolio-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-23-gallery .portfolio-footer .footer-name, 
+#page-23-gallery .portfolio-footer .footer-year {
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-23-gallery .portfolio-footer .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin: 0 20px;
+}
+
+/* --- Mobile Responsive Breakpoints --- */
+@media (max-width: 900px) {
+    .p23-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    #page-23-gallery .portfolio-header .header-nav {
+        display: none;
+    }
+    #page-23-gallery .portfolio-header .header-line {
+        margin-right: 20px;
+    }
+}
+
+
+
+
+
+
+
+/* =========================================
+   PAGE 24: RICHIE EDIBLES PACKAGING DESIGN
+   ========================================= */
+
+#page-24-design {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 100px 5% 80px 5%;
+    box-sizing: border-box;
+    
+    background-image: url('/Page 22 background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.p24-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+    z-index: 10;
+}
+
+/* --- Left Column Elements --- */
+.p24-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.p24-logo {
+    width: 180px;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.p24-title {
+    color: #6C381A;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.p24-description {
+    color: #000000;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.p24-subtitle {
+    color: #6C381A;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 5px 0 0 0;
+}
+
+.p24-software-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.p24-badge {
+    background-color: #7A4922;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.p24-mockup-left-container {
+    background-color: #6A451D; /* Dark backing shape behind the bottom-left image */
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p24-mockup-left {
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Right Column Elements --- */
+.p24-right-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p24-mockup-right {
+    width: 100%;
+    max-width: 650px;
+    object-fit: contain;
+    filter: drop-shadow(5px 15px 25px rgba(0, 0, 0, 0.15));
+}
+
+/* --- Mobile Responsive Breakpoints --- */
+@media (max-width: 900px) {
+    .p24-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+    
+    .p24-left-column {
+        align-items: center;
+    }
+    
+    .p24-description {
+        text-align: left;
+    }
+    
+    .p24-logo {
+        margin-bottom: 20px;
+    }
+    
+    .p24-mockup-left-container {
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   PAGE 25: RICHIE EDIBLES FULL PRESENTATION
+   ========================================= */
+
+#page-25-full {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p25-full-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 1;
+}
+
+/* --- Header Overlay Styling --- */
+#page-25-full .portfolio-header-light {
+    position: absolute;
+    top: 40px; 
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-25-full .portfolio-header-light .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin-right: 30px;
+}
+
+#page-25-full .portfolio-header-light .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-25-full .portfolio-header-light .header-nav a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-25-full .portfolio-header-light .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-25-full .portfolio-footer-light {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-25-full .portfolio-footer-light .footer-name, 
+#page-25-full .portfolio-footer-light .footer-year {
+    color: #333333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-25-full .portfolio-footer-light .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #333333;
+    margin: 0 20px;
+}
+
+/* --- Mobile Responsive Breakpoints --- */
+@media (max-width: 900px) {
+    #page-25-full .portfolio-header-light .header-nav {
+        display: none; 
+    }
+    #page-25-full .portfolio-header-light .header-line {
+        margin-right: 20px;
+    }
+}
+
+
+/* =========================================
+   PAGE 26: RICHIE EDIBLES GALLERY 
+   ========================================= */
+
+#page-26-gallery {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p26-content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* --- Left Side: 6-Grid Section --- */
+.p26-left-section {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45%;
+    max-width: 580px;
+    z-index: 5; /* Lower layer so the cake image sits on top */
+}
+
+.p26-image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.p26-image-box {
+    background-color: #e2e2e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.p26-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.p26-image-box .p26-logo-img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* --- Right Side: Cake Image (Overlaps on top) --- */
+.p26-right-section {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 58%;
+    height: 88vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    z-index: 25; /* Higher layer to place cake image ABOVE the grid boxes */
+    pointer-events: none; /* Allows navigation clicks through open areas */
+}
+
+.p26-main-cake-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Prevents clipping/cutting of the original image artwork */
+    object-position: bottom right;
+    display: block;
+}
+
+/* --- Header Overlay Styling --- */
+#page-26-gallery .portfolio-header {
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-26-gallery .portfolio-header .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin-right: 30px;
+}
+
+#page-26-gallery .portfolio-header .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-26-gallery .portfolio-header .header-nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-26-gallery .portfolio-header .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-26-gallery .portfolio-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-26-gallery .portfolio-footer .footer-name, 
+#page-26-gallery .portfolio-footer .footer-year {
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-26-gallery .portfolio-footer .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin: 0 20px;
+}
+
+/* --- Responsive Layout Breakpoints --- */
+@media (max-width: 900px) {
+    .p26-left-section {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        padding: 90px 5% 20px 5%;
+        box-sizing: border-box;
+    }
+    
+    
+    .p26-right-section {
+        position: relative;
+        width: 100%;
+        height: 40vh;
+    }
+
+    #page-26-gallery .portfolio-header .header-nav {
+        display: none;
+    }
+    
+    #page-26-gallery .portfolio-header .header-line {
+        margin-right: 20px;
+    }
+}
+
+/* =========================================
+   PAGE 27: MOTION GRAPHICS SECTION HEADER
+   ========================================= */
+
+#page-27-motion {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #070707; /* Dark background */
+    /* CSS generated staggered dot pattern to match the image */
+    background-image: 
+        radial-gradient(#1a1a1a 2px, transparent 2px),
+        radial-gradient(#1a1a1a 2px, transparent 2px);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p27-center-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- The White Transform Box --- */
+.p27-bounding-box {
+    position: relative;
+    border: 3px solid #FFFFFF;
+    width: 60vw;
+    max-width: 750px;
+    height: 35vh;
+    max-height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+/* --- Yellow Anchor Nodes --- */
+.p27-node {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #FFC800;
+}
+
+.p27-node.top-left { top: -8.5px; left: -8.5px; }
+.p27-node.top-center { top: -8.5px; left: 50%; transform: translateX(-50%); }
+.p27-node.top-right { top: -8.5px; right: -8.5px; }
+.p27-node.bottom-left { bottom: -8.5px; left: -8.5px; }
+.p27-node.bottom-center { bottom: -8.5px; left: 50%; transform: translateX(-50%); }
+.p27-node.bottom-right { bottom: -8.5px; right: -8.5px; }
+
+/* --- Center Text Styling --- */
+.p27-text {
+    color: #777777; /* Medium-dark gray */
+    font-size: clamp(3rem, 6vw, 6rem); /* Scales fluidly with screen size */
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.1;
+    margin: 0;
+    font-family: 'Arial', sans-serif; /* Fallback for bold sans-serif */
+    letter-spacing: 3px;
+}
+
+/* --- Yellow SVG Cursor Pointer --- */
+.p27-cursor {
+    position: absolute;
+    bottom: -45px;
+    right: -25px;
+    width: 45px;
+    height: 45px;
+    transform: rotate(-10deg); /* Slight tilt matching the image */
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+/* --- Header Overlay Styling --- */
+#page-27-motion .portfolio-header {
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-27-motion .portfolio-header .header-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin-right: 30px;
+}
+
+#page-27-motion .portfolio-header .header-nav {
+    display: flex;
+    gap: 25px;
+}
+
+#page-27-motion .portfolio-header .header-nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#page-27-motion .portfolio-header .header-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #FFC800;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* --- Footer Overlay Styling --- */
+#page-27-motion .portfolio-footer {
+    position: absolute;
+    bottom: 30px;
+    left: 5%;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+}
+
+#page-27-motion .portfolio-footer .footer-name, 
+#page-27-motion .portfolio-footer .footer-year {
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#page-27-motion .portfolio-footer .footer-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #FFFFFF;
+    margin: 0 20px;
+}
+
+/* --- Responsive Layout Breakpoints --- */
+@media (max-width: 900px) {
+    .p27-bounding-box {
+        width: 85vw;
+        height: 25vh;
+    }
+    
+    #page-27-motion .portfolio-header .header-nav {
+        display: none;
+    }
+    
+    #page-27-motion .portfolio-header .header-line {
+        margin-right: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        /* =========================================
+           MOBILE RESPONSIVENESS (Phones & Tablets)
+           ========================================= */
+        @media (max-width: 900px) {
+            
+            /* 1. Stack all the columns vertically instead of side-by-side */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container {
+                grid-template-columns: 1fr; /* Changes it to 1 single column */
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container {
+                grid-template-columns: 1fr; 
+                flex-direction: column; /* Added to handle flex containers like Page 9 */
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container {
+                grid-template-columns: 1fr; 
+                flex-direction: column; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Page 15 Mobile Fixes */
+            .p15-bounding-box {
+                padding: 40px 20px;
+                width: 90%;
+            }
+            .social-huge-title {
+                font-size: 3.5rem; /* Shrinks the giant text so it fits */
+            }
+            .p15-cursor {
+                width: 25px;
+                height: 25px;
+                bottom: -30px;
+                right: -20px;
+            }
+            
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container,
+            .page-16-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container,
+            .page-16-container,
+            .page-17-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container,
+            .page-16-container,
+            .page-17-container,
+            .page-18-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            /* Stack all the columns vertically on mobile */
+            .about-container, 
+            .page-3-container, 
+            .toc-items-grid, 
+            .page-6-container,
+            .page-8-container,
+            .page-9-container,
+            .page-10-container,
+            .page-11-container,
+            .page-12-container,
+            .page-13-container,
+            .page-14-container,
+            .page-16-container,
+            .page-17-container,
+            .page-18-container,
+            .page-19-container {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /* --- Page 20 Mobile Fixes --- */
+            .page-20-container {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: 40px;
+            }
+            .p20-header, .p20-softwares {
+                position: relative; /* Un-pins them from the corners */
+            }
+            .p20-bounding-wrapper {
+                margin: 40px 0;
+            }
+            .p20-bounding-box {
+                padding: 40px 20px;
+                width: 90%;
+            }
+            .p20-main-title {
+                font-size: 2.8rem;
+            }
+            .other-social-title {
+                font-size: 2.8rem; /* Shrinks the giant center text */
+            }
+            .p20-cursor {
+                width: 25px;
+                height: 25px;
+                bottom: -30px;
+                right: -20px;
+            }
+
+
+            /* 2. Allow the top menu to wrap on small screens */
+            .top-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            /* 3. Adjust massive text sizes so they fit on a phone screen */
+            .awaghor-huge { font-size: 3.5rem; }
+            .bg-text { font-size: 25vw; }
+            .toc-huge-title { font-size: 10vw; }
+            .branding-huge-title { font-size: 15vw; }
+            .creative-huge { font-size: 2.5rem; }
+            
+            /* 4. Fix specific alignments for mobile */
+            .p3-right-col { margin-top: 50px; }
+            .right-col { height: auto; }
+            
+            /* 5. Hide the delicate white bounding boxes on phones to keep it clean */
+            .bounding-box, 
+            .p3-bounding-box, 
+            .p4-bounding-box, 
+            .p5-bounding-box {
+                display: none;
+            }
+
+            /* 6. Adjust the footer for mobile */
+            .bottom-bar {
+                width: 100%;
+                padding: 0 10px;
+            }
+            .footer-line {
+                margin: 0 10px;
+            }
+
+            /* --- Page 7 Mobile Fixes --- */
+            .p7-top-row {
+                flex-direction: column; /* Stacks the top columns on top of each other */
+            }
+            .p7-vertical-divider {
+                display: none; /* Hides the vertical line since they are stacked now */
+            }
+            .p7-section-header {
+                flex-direction: column; /* Stacks the text above the white line */
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .p7-section-header .orange-heading {
+                white-space: normal; /* Allows the text to wrap on very tiny screens */
+            }
+            .header-line {
+                width: 100%; /* Makes the white line stretch across the whole phone screen */
+            }
+        }
