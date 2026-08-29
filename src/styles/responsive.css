@@ -1,0 +1,48 @@
+/* The mobile nav panel slides in via `transform: translateX()` while
+   staying `position: fixed`; browsers still count its off-canvas bounds
+   toward the root scrollable area, which would otherwise create a
+   horizontal scrollbar exposing it. Clamp scrolling at the true root. */
+html {
+    overflow-x: hidden;
+}
+
+/* Supplementary styles for the React/Router rebuild — additions the
+   original page-by-page stylesheet (src/style.css) didn't need because
+   nav/footer used to be duplicated markup inside every section. */
+
+/* Footer variant for sections with a light/bright background
+   (Chidel & Richie Edibles packaging + full-presentation pages). */
+.bottom-bar--light span {
+    color: #333333;
+}
+.bottom-bar--light .line {
+    background-color: #333333;
+}
+
+/* The reusable page-container wrapper (Printing section) is positioned
+   content, so it needs to actually take up space in normal flow now that
+   it isn't just one section among many inside one giant scrolling page.
+   Existing pages (#page-21-design, #page-27-motion, etc.) override sizing
+   via their own ID selector; this just gives brand-new pages (Video
+   Editing, Contact) a sane full-viewport default. */
+/* Table of Contents items are now real links to each section's route. */
+.toc-item {
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.toc-item:hover {
+    transform: translateX(4px);
+}
+
+.page-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 5% 80px;
+    box-sizing: border-box;
+    background-color: #050505;
+}

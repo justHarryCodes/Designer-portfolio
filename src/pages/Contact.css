@@ -1,0 +1,99 @@
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    max-width: 900px;
+    margin: 40px auto 0;
+    width: 100%;
+}
+
+.contact-blurb {
+    color: #dddddd;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.9rem;
+}
+
+.contact-list li span:first-child {
+    color: #ffcb05;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.contact-list li a,
+.contact-list li span:last-child {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #aaaaaa;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #ffcb05;
+}
+
+.contact-form button {
+    align-self: flex-start;
+    background-color: #ffcb05;
+    color: #000000;
+    border: none;
+    font-weight: bold;
+    padding: 10px 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.contact-success {
+    color: #aaaaaa;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}

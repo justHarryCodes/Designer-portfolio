@@ -10,8 +10,7 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: #ffffff;
             overflow-x: hidden;
-            /* Added height to allow for scrolling to see the motion effect */
-            height: 200vh; 
+            min-height: 100vh;
         }
 
         /* --- Hero Container --- */
