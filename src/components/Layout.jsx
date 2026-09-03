@@ -7,7 +7,7 @@ export default function Layout() {
     <>
       <ScrollToTop />
       <Navbar />
-      <main>
+      <main className="site-main">
         <Outlet />
       </main>
     </>

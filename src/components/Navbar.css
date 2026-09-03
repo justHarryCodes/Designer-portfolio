@@ -1,7 +1,17 @@
+/* Pushes page content below the now-fixed navbar (it no longer reserves
+   its own space in normal flow). Matches the navbar's tallest rendered
+   height (mobile, where the hamburger button is taller than the desktop
+   nav links) so nothing sits flush under the header on any breakpoint. */
+.site-main {
+    padding-top: 70px;
+}
+
 /* --- Persistent Site Navbar --- */
 .site-navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
